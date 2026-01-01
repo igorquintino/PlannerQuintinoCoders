@@ -3,1047 +3,1325 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Quintino Booster — Mentoria para Primeiro Emprego Dev</title>
-  <meta name="description" content="Quintino Booster: mentoria prática para conquistar seu primeiro emprego em tecnologia, com comunidade +2.000 membros e suporte real." />
+  <title>Planner Quintino Coders 2026</title>
+  <meta name="description" content="Planner Quintino Coders 2026: organize estudos, projetos, vagas e rotina de dev iniciante em um único lugar, no Notion." />
+
+  <!-- Meta básica de compartilhamento -->
+  <meta property="og:title" content="Planner Quintino Coders 2026">
+  <meta property="og:description" content="O planner no Notion para devs iniciantes que querem organizar estudos, projetos e vagas em um só lugar.">
+  <meta property="og:type" content="website">
 
   <style>
-    :root{
-      --bg:#f6f7fb;
-      --ink:#0f172a;
-      --muted:rgba(15,23,42,.78);
-      --muted2:rgba(15,23,42,.62);
-
-      --p1:#6d28d9;
-      --p2:#4c1d95;
-      --p3:#2a0d4d;
-
-      --card:rgba(255,255,255,.92);
-      --border:rgba(15,23,42,.12);
-      --shadow: 0 20px 65px rgba(2,6,23,.12);
-      --shadow2: 0 12px 40px rgba(2,6,23,.10);
-      --radius: 18px;
-      --max:1120px;
-
-      --ok:#22c55e;
-      --warn:#f59e0b;
-      --bad:#ef4444;
-
-      --ease: cubic-bezier(.2,.8,.2,1);
-    }
-
-    *{box-sizing:border-box}
-    html,body{height:100%}
-
-    body{
+    *{
+      box-sizing:border-box;
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial;
-      color:var(--ink);
-      --px: 0px;
-      --py: 0px;
-      background:
-        radial-gradient(1200px 700px at calc(16% + var(--px)) calc(8% + var(--py)), rgba(109,40,217,.16), transparent 60%),
-        radial-gradient(900px 600px at calc(90% + var(--px)) calc(26% + var(--py)), rgba(76,29,149,.14), transparent 55%),
-        linear-gradient(180deg, #ffffff, var(--bg) 55%, #ffffff);
-      overflow-x:hidden;
-    }
-
-    a{color:inherit}
-    .wrap{max-width:var(--max);margin:0 auto;padding:0 20px}
-    .muted{color:var(--muted)}
-    .mini{font-size:13px;color:var(--muted2);line-height:1.6}
-    .divider{height:1px;background:rgba(15,23,42,.10);margin:16px 0}
-    .pill{
-      display:inline-flex;gap:8px;align-items:center;
-      padding:8px 12px;border-radius:999px;
-      border:1px solid rgba(15,23,42,.14);
-      background:rgba(255,255,255,.86);
-      font-weight:900;font-size:13px;
-      box-shadow:0 10px 30px rgba(2,6,23,.06);
-    }
-    .dot{width:8px;height:8px;border-radius:999px;background:var(--ok);display:inline-block}
-
-    /* ===== Progress bar (leitura) ===== */
-    .readbar{
-      position:fixed;left:0;top:0;height:3px;width:100%;
-      z-index:9999;background:transparent;
-    }
-    .readbar > i{
-      display:block;height:100%;width:0%;
-      background:linear-gradient(90deg, var(--p1), var(--p2));
-      box-shadow:0 10px 25px rgba(109,40,217,.35);
-    }
-
-    /* TOPBAR */
-    .topbar{
-      position:sticky;top:0;z-index:50;
-      backdrop-filter: blur(14px);
-      background:rgba(255,255,255,.86);
-      border-bottom:1px solid rgba(15,23,42,.10);
-      transition:box-shadow .25s var(--ease), background .25s var(--ease);
-    }
-    .topbar.scrolled{
-      background:rgba(255,255,255,.92);
-      box-shadow:0 16px 45px rgba(2,6,23,.10);
-    }
-    .nav{
-      display:flex;align-items:center;justify-content:space-between;
-      gap:16px;padding:12px 0;
-    }
-    .brand{display:flex;align-items:center;gap:10px}
-    .logo{
-      width:40px;height:40px;border-radius:14px;
-      background:linear-gradient(135deg,var(--p1),var(--p2));
-      display:grid;place-items:center;
-      color:#fff;font-weight:950;
-      box-shadow:0 14px 35px rgba(109,40,217,.25);
-      letter-spacing:.4px;
-    }
-    .brand small{display:block;color:var(--muted2);font-weight:700;margin-top:2px}
-    .links{display:flex;gap:18px;align-items:center}
-    .links a{
-      text-decoration:none;
-      font-size:14px;font-weight:900;
-      color:rgba(15,23,42,.70);
-      padding:8px 10px;border-radius:999px;
-      transition:.2s;
-    }
-    .links a:hover{color:var(--ink);background:rgba(109,40,217,.08)}
-    .right{display:flex;gap:10px;align-items:center}
-
-    /* BUTTONS */
-    .btn{
-      display:inline-flex;align-items:center;justify-content:center;
-      padding:12px 18px;border-radius:999px;
-      font-weight:950;border:1px solid rgba(15,23,42,.14);
-      background:#fff;cursor:pointer;
-      transition:.2s;
-      text-decoration:none;
-      box-shadow:0 10px 25px rgba(2,6,23,.06);
-    }
-    .btn.primary{
-      background:linear-gradient(135deg,var(--p1),var(--p2));
-      color:#fff;border:none;
-      box-shadow:0 18px 45px rgba(109,40,217,.30);
-      position:relative;
-      overflow:hidden;
-    }
-    /* Shine */
-    .btn.primary:after{
-      content:"";
-      position:absolute;inset:-80px -120px;
-      background:linear-gradient(120deg, transparent 30%, rgba(255,255,255,.35) 50%, transparent 70%);
-      transform:translateX(-60%) rotate(10deg);
-      transition:transform .75s var(--ease);
-    }
-    .btn.primary:hover:after{transform:translateX(60%) rotate(10deg)}
-    .btn.ghost{background:rgba(255,255,255,.65)}
-    .btn:hover{transform:translateY(-1px)}
-
-    /* HERO */
-    header{padding:34px 0 18px}
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.1fr .9fr;
-      gap:26px;
-      align-items:start;
-    }
-    h1{
-      font-size:clamp(30px,5vw,56px);
-      line-height:1.02;
-      margin:14px 0 10px;
-      letter-spacing:-.5px;
-    }
-    .lead{
-      font-size:16px;
-      line-height:1.75;
-      max-width:64ch;
-      color:var(--muted);
-      margin:0;
-    }
-    .hero-actions{
-      display:flex;gap:12px;flex-wrap:wrap;
-      margin-top:16px;
-    }
-
-    .trust-row{
-      display:flex;gap:10px;flex-wrap:wrap;align-items:center;
-      margin-top:14px;
-    }
-    .trust{
-      display:inline-flex;align-items:center;gap:8px;
-      padding:8px 10px;border-radius:12px;
-      border:1px solid rgba(15,23,42,.10);
-      background:rgba(255,255,255,.78);
-      font-weight:900;font-size:13px;color:rgba(15,23,42,.78);
-    }
-    .trust i{
-      width:20px;height:20px;border-radius:8px;
-      background:rgba(34,197,94,.14);
-      display:grid;place-items:center;
-      color:var(--ok);
-      font-style:normal;font-weight:950;
-    }
-
-    /* HERO CARD */
-    .hero-card{
-      background:rgba(255,255,255,.94);
-      border-radius:var(--radius);
-      border:1px solid var(--border);
-      padding:20px;
-      box-shadow:var(--shadow);
-      position:relative;
-      overflow:hidden;
-    }
-    .hero-card:before{
-      content:"";
-      position:absolute;inset:-40px -60px auto auto;
-      width:240px;height:240px;border-radius:999px;
-      background:radial-gradient(circle at 30% 30%, rgba(109,40,217,.18), transparent 60%);
-      filter:blur(0px);
-    }
-    .stamp{
-      display:flex;gap:12px;align-items:center;justify-content:space-between;
-      padding:12px 14px;border-radius:16px;
-      border:1px solid rgba(15,23,42,.10);
-      background:rgba(109,40,217,.06);
-      margin-bottom:14px;
-    }
-    .stamp .big{
-      font-weight:950;
-      font-size:34px;
-      letter-spacing:-1px;
-    }
-    .stamp .mid{font-weight:950;color:rgba(15,23,42,.78)}
-    .kpi{
-      display:grid;grid-template-columns:1fr 1fr;gap:12px;
-      margin-top:12px;
-    }
-    .k{
-      border:1px solid var(--border);
-      border-radius:14px;
-      padding:12px;
-      background:rgba(255,255,255,.78);
-    }
-    .k b{font-size:15px}
-    .k span{display:block;margin-top:4px;font-size:13px;color:var(--muted2);line-height:1.35}
-
-    .checklist{
-      margin-top:12px;
-      display:grid;gap:8px;
-    }
-    .check{
-      display:flex;gap:10px;align-items:flex-start;
-      padding:10px 12px;border-radius:14px;
-      border:1px solid rgba(15,23,42,.10);
-      background:rgba(255,255,255,.80);
-    }
-    .check .ok{
-      width:22px;height:22px;border-radius:8px;
-      background:rgba(34,197,94,.14);
-      display:grid;place-items:center;
-      color:var(--ok);
-      font-weight:950;
-      flex:0 0 auto;
-    }
-    .check b{font-size:14px}
-    .check span{display:block;color:var(--muted2);font-size:13px;line-height:1.35;margin-top:2px}
-
-    /* SECTIONS */
-    section{padding:40px 0}
-    .section-title{
-      font-size:clamp(22px,4vw,36px);
-      margin:0 0 10px;
-      letter-spacing:-.4px;
-    }
-    .section-desc{
-      max-width:78ch;
-      line-height:1.75;
-      color:var(--muted);
-      margin:0 0 16px;
-    }
-
-    /* GRIDS */
-    .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
-    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
-    .grid-2{display:grid;grid-template-columns:1.1fr .9fr;gap:18px}
-
-    /* CARD */
-    .card{
-      background:rgba(255,255,255,.94);
-      border-radius:var(--radius);
-      border:1px solid var(--border);
-      padding:18px;
-      box-shadow:var(--shadow2);
-    }
-    .card strong{display:block;margin-bottom:6px}
-    .card p{margin:0;line-height:1.6;color:var(--muted)}
-    .card.soft{background:rgba(255,255,255,.70)}
-
-    /* TIMELINE */
-    .timeline{display:grid;gap:10px;margin-top:10px}
-    .step{
-      display:flex;gap:12px;align-items:flex-start;
-      padding:14px;border-radius:16px;
-      border:1px solid rgba(15,23,42,.10);
-      background:rgba(255,255,255,.86);
-      box-shadow:0 12px 30px rgba(2,6,23,.06);
-    }
-    .num{
-      width:34px;height:34px;border-radius:14px;
-      display:grid;place-items:center;
-      background:linear-gradient(135deg,var(--p1),var(--p2));
-      color:#fff;font-weight:950;
-      flex:0 0 auto;
-    }
-    .step b{display:block}
-    .step span{display:block;color:var(--muted2);margin-top:3px;line-height:1.5;font-size:13px}
-
-    /* TESTIMONIALS */
-    .quote{
-      position:relative;
-      padding:18px;border-radius:18px;
-      border:1px solid rgba(15,23,42,.10);
-      background:rgba(255,255,255,.92);
-      box-shadow:var(--shadow2);
-    }
-    .quote:before{
-      content:"“";
-      position:absolute;left:14px;top:6px;
-      font-size:44px;font-weight:950;
-      color:rgba(109,40,217,.25);
-      line-height:1;
-    }
-    .quote p{margin:18px 0 10px;color:var(--muted);line-height:1.65}
-    .who{display:flex;gap:10px;align-items:center}
-    .avatar{
-      width:34px;height:34px;border-radius:12px;
-      background:rgba(109,40,217,.14);
-      border:1px solid rgba(109,40,217,.20);
-      display:grid;place-items:center;
-      font-weight:950;color:rgba(109,40,217,.95);
-    }
-    .who b{display:block;font-size:14px}
-    .who span{display:block;font-size:12px;color:var(--muted2);margin-top:1px}
-
-    /* PRICING */
-    .pricing{
-      background:rgba(255,255,255,.96);
-      border-radius:22px;
-      border:1px solid rgba(15,23,42,.12);
-      box-shadow:var(--shadow);
-      overflow:hidden;
-    }
-    .pricing-head{
-      padding:18px 18px 14px;
-      background:linear-gradient(135deg, rgba(109,40,217,.12), rgba(76,29,149,.08));
-      border-bottom:1px solid rgba(15,23,42,.10);
-    }
-    .price{
-      display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap;
-    }
-    .price .value{
-      font-size:38px;font-weight:950;letter-spacing:-1px;
-    }
-    .price .value small{font-size:14px;color:var(--muted2);font-weight:900}
-    .price .anchor{font-size:13px;color:var(--muted2);font-weight:900}
-    .pricing-body{padding:18px}
-    .inc{display:grid;gap:10px;margin-top:10px}
-    .inc .item{
-      display:flex;gap:10px;align-items:flex-start;
-      padding:10px 12px;border-radius:14px;
-      border:1px solid rgba(15,23,42,.10);
-      background:rgba(255,255,255,.80);
-    }
-    .inc .item i{
-      width:22px;height:22px;border-radius:8px;
-      background:rgba(34,197,94,.14);
-      display:grid;place-items:center;
-      color:var(--ok);
-      font-style:normal;font-weight:950;
-      flex:0 0 auto;
-    }
-    .pricing .cta{margin-top:14px;display:grid;gap:10px}
-    .scarcity{
-      display:flex;gap:10px;align-items:center;justify-content:space-between;flex-wrap:wrap;
-      padding:12px 12px;border-radius:16px;
-      border:1px solid rgba(245,158,11,.22);
-      background:rgba(245,158,11,.10);
-      color:rgba(15,23,42,.82);
-      font-weight:900;
-    }
-    .scarcity span{font-size:13px;color:rgba(15,23,42,.70);font-weight:900}
-
-    /* FAQ accordion */
-    .faq{display:grid;gap:10px;margin-top:10px}
-    .acc{
-      border-radius:16px;
-      border:1px solid rgba(15,23,42,.12);
-      background:rgba(255,255,255,.92);
-      overflow:hidden;
-      box-shadow:0 12px 30px rgba(2,6,23,.06);
-    }
-    .acc button{
-      width:100%;
-      padding:14px 16px;
-      font-weight:950;
-      background:none;
-      border:none;
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      cursor:pointer;
-      gap:10px;
-    }
-    .acc button .plus{
-      width:28px;height:28px;border-radius:12px;
-      display:grid;place-items:center;
-      background:rgba(109,40,217,.10);
-      color:rgba(109,40,217,.95);
-      font-weight:950;
-      flex:0 0 auto;
-      transition:transform .25s var(--ease), opacity .25s var(--ease);
-    }
-    /* Accordion animado */
-    .acc .content{
-      display:block;
-      max-height:0;
-      overflow:hidden;
-      opacity:0;
-      padding:0 16px;
-      transition:max-height .5s var(--ease), opacity .35s var(--ease), padding .35s var(--ease);
-      font-size:14px;
-      line-height:1.65;
-      color:var(--muted);
-    }
-    .acc.open .content{
-      max-height:280px;
-      opacity:1;
-      padding:0 16px 14px;
-    }
-    .acc.open button .plus{transform:rotate(45deg);opacity:.9}
-
-    /* FINAL */
-    .final{
-      background:rgba(255,255,255,.94);
-      border-radius:var(--radius);
-      padding:26px;
-      border:1px solid var(--border);
-      box-shadow:var(--shadow);
-    }
-
-    /* STICKY CTA (mobile) */
-    .sticky-cta{
-      position:fixed;left:0;right:0;bottom:0;
-      padding:10px 14px;
-      background:rgba(255,255,255,.92);
-      border-top:1px solid rgba(15,23,42,.12);
-      backdrop-filter: blur(14px);
-      display:none;
-      z-index:80;
-    }
-    .sticky-cta .wrap{
-      display:flex;gap:10px;align-items:center;justify-content:space-between;
       padding:0;
     }
 
-    /* ===== Reveal / Lift / Float / Tilt ===== */
-    .lift{
-      transition:transform .25s var(--ease), box-shadow .25s var(--ease);
-    }
-    .lift:hover{
-      transform:translateY(-6px);
-      box-shadow:0 22px 60px rgba(2,6,23,.14);
+    body{
+      font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:#f5f5f7;
+      color:#0f172a;
+      -webkit-font-smoothing:antialiased;
     }
 
-    .reveal{
-      opacity:0;
-      transform:translateY(18px) scale(.985);
-      transition:opacity .7s var(--ease), transform .7s var(--ease);
-      will-change:opacity, transform;
-    }
-    .reveal.in{opacity:1;transform:translateY(0) scale(1)}
-    .reveal[data-delay="1"]{transition-delay:.06s}
-    .reveal[data-delay="2"]{transition-delay:.12s}
-    .reveal[data-delay="3"]{transition-delay:.18s}
-    .reveal[data-delay="4"]{transition-delay:.24s}
-
-    .floaty{animation:floaty 6.5s var(--ease) infinite}
-    @keyframes floaty{
-      0%,100%{transform:translateY(0)}
-      50%{transform:translateY(-8px)}
+    a{
+      text-decoration:none;
+      color:inherit;
     }
 
-    .tilt{
-      transform-style:preserve-3d;
-      will-change:transform;
+    img{
+      max-width:100%;
+      display:block;
     }
 
-    /* Preferências de acessibilidade */
-    @media (prefers-reduced-motion: reduce){
-      *{animation:none !important; transition:none !important; scroll-behavior:auto !important;}
+    .page{
+      min-height:100vh;
+      background:#f5f5f7;
     }
 
-    /* RESPONSIVE */
-    @media(max-width:980px){
-      .hero-grid{grid-template-columns:1fr}
-      .grid-4{grid-template-columns:1fr 1fr}
-      .grid-3{grid-template-columns:1fr}
-      .grid-2{grid-template-columns:1fr}
-      .links{display:none}
+    .pageHeader{
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:#f5f5f7f2;
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(15,23,42,.06);
+      transition:box-shadow .18s ease, border-color .18s ease, background .18s ease;
     }
-    @media(max-width:520px){
-      h1{text-align:center}
-      .lead{text-align:center}
-      .hero-actions .btn{width:100%}
-      .kpi{grid-template-columns:1fr}
-      .grid-4{grid-template-columns:1fr}
-      section{padding:32px 0}
-      .sticky-cta{display:block}
+
+    .pageHeader.scrolled{
+      box-shadow:0 10px 40px rgba(15,23,42,.18);
+      border-color:rgba(15,23,42,.08);
+      background:#f5f5f7fa;
+    }
+
+    .headerInner{
+      max-width:1120px;
+      margin:0 auto;
+      padding:16px 20px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+    }
+
+    .brandArea{
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .brandLogo{
+      width:32px;
+      height:32px;
+      border-radius:8px;
+      background:#000000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#f9fafb;
+      font-weight:700;
+      font-size:18px;
+    }
+
+    .brandTextMain{
+      font-size:15px;
+      font-weight:600;
+    }
+
+    .brandTextSub{
+      font-size:12px;
+      color:rgba(15,23,42,.6);
+    }
+
+    .headerCta{
+      display:flex;
+      gap:10px;
+      align-items:center;
+      flex-wrap:wrap;
+    }
+
+    .buttonPrimary{
+      padding:10px 18px;
+      border-radius:999px;
+      background:#000000;
+      color:#f9fafb;
+      font-size:14px;
+      font-weight:600;
+      border:none;
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      transition:transform .12s ease, box-shadow .12s ease, background .12s ease;
+    }
+
+    .buttonPrimary span{
+      font-size:16px;
+    }
+
+    .buttonPrimary:hover{
+      transform:translateY(-1px);
+      box-shadow:0 14px 30px rgba(15,23,42,.38);
+      background:#020617;
+    }
+
+    .buttonPrimary:active{
+      transform:translateY(0);
+      box-shadow:0 6px 18px rgba(15,23,42,.32);
+    }
+
+    .buttonGhost{
+      padding:9px 16px;
+      border-radius:999px;
+      border:1px solid rgba(15,23,42,.15);
+      font-size:13px;
+      font-weight:500;
+      background:rgba(255,255,255,.85);
+      cursor:pointer;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      transition:background .12s ease, border-color .12s ease, transform .12s ease;
+    }
+
+    .buttonGhost:hover{
+      background:#ffffff;
+      border-color:rgba(15,23,42,.25);
+      transform:translateY(-1px);
+    }
+
+    .badgeTop{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:4px 10px;
+      border-radius:999px;
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.09em;
+      background:rgba(15,23,42,.04);
+      color:rgba(15,23,42,.7);
+      margin-bottom:14px;
+    }
+
+    .badgeDot{
+      width:8px;
+      height:8px;
+      border-radius:999px;
+      background:#22c55e;
+      box-shadow:0 0 0 4px rgba(34,197,94,.2);
+    }
+
+    .hero{
+      max-width:1120px;
+      margin:0 auto;
+      padding:40px 20px 32px;
+      display:grid;
+      grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
+      gap:32px;
+      align-items:center;
+    }
+
+    .heroTitle{
+      font-size:34px;
+      line-height:1.15;
+      font-weight:800;
+      letter-spacing:-.03em;
+      margin-bottom:14px;
+    }
+
+    .heroTitle span{
+      background:#000000;
+      color:#f9fafb;
+      padding:3px 10px;
+      border-radius:999px;
+      font-size:18px;
+      margin-left:4px;
+    }
+
+    .heroSubtitle{
+      font-size:16px;
+      line-height:1.6;
+      color:rgba(15,23,42,.72);
+      max-width:420px;
+      margin-bottom:20px;
+    }
+
+    .heroPoints{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+      margin-bottom:22px;
+    }
+
+    .heroChip{
+      font-size:12px;
+      padding:6px 10px;
+      border-radius:999px;
+      border:1px solid rgba(15,23,42,.12);
+      background:#ffffff;
+      display:inline-flex;
+      align-items:center;
+      gap:6px;
+      color:rgba(15,23,42,.8);
+    }
+
+    .heroChipIcon{
+      width:18px;
+      height:18px;
+      border-radius:999px;
+      background:#000000;
+      color:#f9fafb;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:11px;
+    }
+
+    .heroCtas{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+      align-items:center;
+    }
+
+    .heroNote{
+      font-size:12px;
+      color:rgba(15,23,42,.6);
+      margin-top:8px;
+    }
+
+    .heroMedia{
+      position:relative;
+    }
+
+    .heroGlow{
+      position:absolute;
+      inset:-18px -26px auto;
+      background:radial-gradient(circle at top,#1e293b 0,#020617 38%,transparent 65%);
+      opacity:.85;
+      border-radius:24px;
+      z-index:0;
+    }
+
+    .plannerCard{
+      position:relative;
+      background:#020617;
+      border-radius:20px;
+      overflow:hidden;
+      box-shadow:0 24px 60px rgba(15,23,42,.4);
+      border:1px solid rgba(148,163,184,.28);
+      z-index:1;
+    }
+
+    .plannerHeader{
+      height:110px;
+      background-image:radial-gradient(circle at 10% 10%,#f97316 0,#020617 55%),radial-gradient(circle at 80% 20%,#22d3ee 0,#020617 55%);
+      background-size:cover;
+      background-position:center;
+      position:relative;
+    }
+
+    .plannerLogoMark{
+      position:absolute;
+      left:20px;
+      bottom:-22px;
+      width:56px;
+      height:56px;
+      border-radius:16px;
+      background:#000000;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#f9fafb;
+      font-size:28px;
+      font-weight:700;
+      box-shadow:0 12px 30px rgba(0,0,0,.6);
+    }
+
+    .plannerBody{
+      padding:40px 22px 22px;
+      color:#f9fafb;
+    }
+
+    .plannerTitle{
+      font-weight:700;
+      font-size:18px;
+      margin-bottom:12px;
+    }
+
+    .plannerSub{
+      font-size:13px;
+      color:rgba(226,232,240,.86);
+      margin-bottom:18px;
+    }
+
+    .plannerGrid{
+      display:grid;
+      grid-template-columns:1.1fr 1fr;
+      gap:12px;
+      align-items:stretch;
+    }
+
+    .flipClock{
+      background:#020617;
+      border-radius:14px;
+      padding:14px 10px 10px;
+      border:1px solid rgba(148,163,184,.4);
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
+    }
+
+    .flipClockTop{
+      display:flex;
+      gap:6px;
+      margin-bottom:8px;
+    }
+
+    .flipBlock{
+      flex:1;
+      background:#000000;
+      border-radius:10px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:32px;
+      font-weight:800;
+      letter-spacing:.06em;
+    }
+
+    .flipClockBottom{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-size:10px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:rgba(148,163,184,.96);
+    }
+
+    .miniMonth{
+      background:#f9fafb;
+      color:#020617;
+      border-radius:14px;
+      padding:8px 10px 10px;
+      font-size:10px;
+    }
+
+    .miniMonthHeader{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      margin-bottom:6px;
+      font-weight:600;
+      font-size:10px;
+    }
+
+    .miniMonthArrows{
+      display:flex;
+      gap:8px;
+      font-size:9px;
+    }
+
+    .miniMonthGrid{
+      display:grid;
+      grid-template-columns:repeat(7,1fr);
+      gap:3px;
+      text-align:center;
+    }
+
+    .miniMonthCellLabel{
+      font-size:8px;
+      font-weight:600;
+      color:rgba(15,23,42,.6);
+    }
+
+    .miniMonthCellDay{
+      font-size:8px;
+      padding:3px 0;
+      border-radius:999px;
+      color:#020617;
+    }
+
+    .miniMonthCellDayActive{
+      background:#020617;
+      color:#f9fafb;
+      font-weight:700;
+    }
+
+    .plannerFooterTags{
+      margin-top:16px;
+      display:flex;
+      flex-wrap:wrap;
+      gap:6px;
+      font-size:9px;
+      color:rgba(148,163,184,.98);
+    }
+
+    .plannerTag{
+      border-radius:999px;
+      border:1px solid rgba(148,163,184,.6);
+      padding:2px 6px;
+    }
+
+    .section{
+      max-width:1120px;
+      margin:0 auto;
+      padding:28px 20px;
+    }
+
+    .sectionHeader{
+      display:flex;
+      justify-content:space-between;
+      align-items:flex-end;
+      gap:16px;
+      margin-bottom:18px;
+      flex-wrap:wrap;
+    }
+
+    .sectionTitle{
+      font-size:20px;
+      font-weight:700;
+      letter-spacing:-.02em;
+    }
+
+    .sectionSubtitle{
+      font-size:13px;
+      color:rgba(15,23,42,.65);
+      max-width:420px;
+    }
+
+    .pillList{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      font-size:11px;
+    }
+
+    .pill{
+      padding:5px 9px;
+      border-radius:999px;
+      border:1px solid rgba(15,23,42,.12);
+      background:#ffffff;
+    }
+
+    .audienceGrid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+    }
+
+    .audienceCard{
+      background:#ffffff;
+      border-radius:14px;
+      padding:14px 14px 16px;
+      border:1px solid rgba(15,23,42,.09);
+      box-shadow:0 14px 40px rgba(15,23,42,.04);
+    }
+
+    .audienceLabel{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:rgba(15,23,42,.45);
+      margin-bottom:6px;
+    }
+
+    .audienceTitle{
+      font-size:15px;
+      font-weight:600;
+      margin-bottom:6px;
+    }
+
+    .audienceText{
+      font-size:13px;
+      color:rgba(15,23,42,.7);
+      line-height:1.5;
+    }
+
+    .modulesGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+      margin-top:6px;
+    }
+
+    .moduleCard{
+      background:#ffffff;
+      border-radius:16px;
+      overflow:hidden;
+      border:1px solid rgba(15,23,42,.08);
+      display:flex;
+      flex-direction:column;
+    }
+
+    .moduleCardTop{
+      background:#020617;
+      padding:14px 16px;
+      display:flex;
+      align-items:center;
+      gap:10px;
+    }
+
+    .moduleIconBox{
+      width:34px;
+      height:34px;
+      border-radius:999px;
+      background:#020617;
+      border:1px solid rgba(248,250,252,.35);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:18px;
+      color:#f9fafb;
+    }
+
+    .moduleTitleTop{
+      color:#f9fafb;
+      font-size:14px;
+      font-weight:600;
+    }
+
+    .moduleCardBottom{
+      padding:10px 14px 14px;
+      background:#ffffff;
+    }
+
+    .moduleMeta{
+      font-size:11px;
+      color:rgba(15,23,42,.6);
+      margin-bottom:4px;
+    }
+
+    .moduleText{
+      font-size:13px;
+      color:rgba(15,23,42,.8);
+      line-height:1.5;
+    }
+
+    .benefitsGrid{
+      display:grid;
+      grid-template-columns:repeat(3,minmax(0,1fr));
+      gap:14px;
+    }
+
+    .benefitCard{
+      background:#020617;
+      border-radius:18px;
+      padding:14px 14px 16px;
+      color:#f9fafb;
+      border:1px solid rgba(148,163,184,.4);
+    }
+
+    .benefitTag{
+      font-size:10px;
+      text-transform:uppercase;
+      letter-spacing:.16em;
+      color:rgba(148,163,184,.9);
+      margin-bottom:6px;
+    }
+
+    .benefitTitle{
+      font-size:15px;
+      font-weight:600;
+      margin-bottom:6px;
+    }
+
+    .benefitText{
+      font-size:13px;
+      color:rgba(226,232,240,.96);
+      line-height:1.5;
+    }
+
+    .priceSection{
+      max-width:1120px;
+      margin:0 auto;
+      padding:10px 20px 40px;
+    }
+
+    .priceCard{
+      background:#020617;
+      border-radius:22px;
+      padding:22px 20px 22px;
+      color:#f9fafb;
+      display:grid;
+      grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);
+      gap:24px;
+      border:1px solid rgba(148,163,184,.5);
+      box-shadow:0 26px 70px rgba(15,23,42,.5);
+    }
+
+    .priceHeaderLabel{
+      font-size:11px;
+      text-transform:uppercase;
+      letter-spacing:.12em;
+      color:rgba(148,163,184,.9);
+      margin-bottom:8px;
+    }
+
+    .priceTitle{
+      font-size:20px;
+      font-weight:700;
+      letter-spacing:-.02em;
+      margin-bottom:6px;
+    }
+
+    .priceSubtitle{
+      font-size:13px;
+      color:rgba(226,232,240,.86);
+      margin-bottom:14px;
+    }
+
+    .priceBulletList{
+      font-size:13px;
+      list-style:none;
+      margin:0;
+      padding:0;
+    }
+
+    .priceBulletList li{
+      display:flex;
+      align-items:flex-start;
+      gap:8px;
+      margin-bottom:6px;
+    }
+
+    .priceBulletIcon{
+      width:16px;
+      height:16px;
+      border-radius:999px;
+      background:#22c55e;
+      color:#022c22;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:12px;
+      margin-top:2px;
+    }
+
+    .priceCtaArea{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      align-items:flex-start;
+      justify-content:center;
+    }
+
+    .priceGuarantee{
+      font-size:12px;
+      color:rgba(226,232,240,.9);
+      max-width:260px;
+    }
+
+    .priceMiniNote{
+      font-size:11px;
+      color:rgba(148,163,184,.96);
+    }
+
+    .faqGrid{
+      display:grid;
+      grid-template-columns:repeat(2,minmax(0,1fr));
+      gap:14px;
+    }
+
+    .faqItem{
+      background:#ffffff;
+      border-radius:14px;
+      padding:14px 14px 16px;
+      border:1px solid rgba(15,23,42,.08);
+    }
+
+    .faqQuestion{
+      font-size:14px;
+      font-weight:600;
+      margin-bottom:6px;
+    }
+
+    .faqAnswer{
+      font-size:13px;
+      color:rgba(15,23,42,.7);
+      line-height:1.5;
+    }
+
+    .pageFooter{
+      border-top:1px solid rgba(15,23,42,.08);
+      padding:16px 20px 28px;
+      text-align:center;
+      font-size:11px;
+      color:rgba(15,23,42,.6);
+    }
+
+    .pageFooter strong{
+      font-weight:600;
+      color:rgba(15,23,42,.82);
+    }
+
+    @media (max-width:960px){
+
+      .hero{
+        grid-template-columns:minmax(0,1fr);
+        padding-top:26px;
+      }
+
+      .heroMedia{
+        order:-1;
+      }
+
+      .plannerBody{
+        padding-top:34px;
+      }
+
+      .priceCard{
+        grid-template-columns:minmax(0,1fr);
+      }
+
+      .benefitsGrid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+
+      .audienceGrid{
+        grid-template-columns:repeat(2,minmax(0,1fr));
+      }
+    }
+
+    @media (max-width:720px){
+
+      .headerInner{
+        padding-inline:16px;
+      }
+
+      .hero{
+        padding-inline:16px;
+      }
+
+      .section{
+        padding-inline:16px;
+      }
+
+      .priceSection{
+        padding-inline:16px;
+      }
+
+      .heroTitle{
+        font-size:26px;
+      }
+
+      .heroTitle span{
+        display:inline-block;
+        margin-top:6px;
+        margin-left:0;
+      }
+
+      .plannerGrid{
+        grid-template-columns:minmax(0,1fr);
+      }
+
+      .miniMonth{
+        margin-top:8px;
+      }
+
+      .modulesGrid{
+        grid-template-columns:minmax(0,1fr);
+      }
+
+      .benefitsGrid{
+        grid-template-columns:minmax(0,1fr);
+      }
+
+      .audienceGrid{
+        grid-template-columns:minmax(0,1fr);
+      }
+
+      .faqGrid{
+        grid-template-columns:minmax(0,1fr);
+      }
+
+      .priceCard{
+        padding:18px 16px 18px;
+      }
     }
   </style>
 </head>
 
 <body>
-  <!-- Progress bar -->
-  <div class="readbar" aria-hidden="true"><i></i></div>
-
-  <!-- TOPBAR -->
-  <div class="topbar">
-    <div class="wrap">
-      <div class="nav">
-        <div class="brand">
-          <div class="logo">QC</div>
+  <div class="page">
+    <header class="pageHeader" id="topo">
+      <div class="headerInner">
+        <div class="brandArea">
           <div>
-            <b>Quintino Booster</b>
-            <small>Mentoria de empregabilidade para primeiro emprego dev</small>
+            <div class="brandTextMain">Quintino Coders</div>
+            <div class="brandTextSub">Planner 2026 para devs iniciantes</div>
           </div>
         </div>
-
-        <div class="links">
-          <a href="#como-funciona">Como funciona</a>
-          <a href="#processo">Processo</a>
-          <a href="#provas">Provas</a>
-          <a href="#preco">Entrar</a>
-          <a href="#garantia">Garantia</a>
-          <a href="#faq">Dúvidas</a>
-        </div>
-
-        <div class="right">
-          <a class="btn ghost" href="#preco">Ver plano</a>
-          <a class="btn primary" href="https://pay.kiwify.com.br/d9puKrg" target="_blank" rel="noopener">Quero entrar</a>
+        <div class="headerCta">
+          <a href="https://pay.kiwify.com.br/r5H2nqm" class="buttonPrimary js-main-buy">
+            Baixar meu Planner agora
+            <span>→</span>
+          </a>
+          <a href="#o-que-tem" class="buttonGhost">
+            Ver por dentro
+          </a>
         </div>
       </div>
-    </div>
-  </div>
+    </header>
 
-  <!-- HERO -->
-  <header>
-    <div class="wrap">
-      <div class="hero-grid">
-        <div class="reveal">
-          <div class="pill">
-            <span class="dot"></span>
-            Fundador da Quintino Coders com comunidade acima de <b>+<span data-count="2000" data-dur="900">2000</span></b> programadores
-          </div>
-
-          <h1>Conquiste seu primeiro emprego como programador<br/>ou receba seu dinheiro de volta</h1>
-
-          <p class="lead">
-            Participe do <b>Quintino Booster</b>, uma mentoria prática onde eu te acompanho
-            <b>do currículo até a contratação</b> com plano semanal, feedback, projetos, avaliações e envios de vagas alinhadas ao seu perfil.
-            Foco em <b>empregabilidade real</b>, sem teoria infinita.
-          </p>
-
-          <div class="hero-actions">
-            <a class="btn primary" href="https://pay.kiwify.com.br/d9puKrg" target="_blank" rel="noopener">Quero entrar agora</a>
-            <a class="btn" href="#processo">Ver o processo</a>
-            <a class="btn" href="#garantia">Ver garantia</a>
-          </div>
-
-          <div class="trust-row">
-            <div class="trust"><i>✓</i> plano semanal executável</div>
-            <div class="trust"><i>✓</i> feedback humano</div>
-            <div class="trust"><i>✓</i> foco em vagas reais</div>
-            <div class="trust"><i>✓</i> comunidade e cobrança</div>
-          </div>
-
-          <p class="mini" style="margin-top:12px">
-            Vagas limitadas para manter acompanhamento real. Sem promessas mágicas, método e constância.
-          </p>
-        </div>
-
-        <div class="hero-card reveal floaty tilt lift" data-delay="1">
-          <div class="stamp">
-            <div>
-              <div class="big">0%</div>
-              <div class="mid">enrolação</div>
-              <div class="mini">100% foco em contratação</div>
-            </div>
-            <div class="pill" style="border-color:rgba(34,197,94,.25);background:rgba(34,197,94,.10)">
-              <span class="dot"></span>
-              acompanhamento ativo
-            </div>
-          </div>
-
-          <strong style="font-size:16px">Resumo do que você recebe</strong>
-          <p class="mini" style="margin-top:8px">
-            Mentoria, plano de candidatura, currículo e LinkedIn, entrevistas, direção de portfólio, avaliações e vagas personalizadas.
-          </p>
-
-          <div class="kpi">
-            <div class="k"><b>Plano semanal</b><span>metas, candidaturas, ajustes e projetos</span></div>
-            <div class="k"><b>Feedback</b><span>currículo, LinkedIn, postura e discurso</span></div>
-            <div class="k"><b>Comunidade</b><span>vagas, suporte e networking</span></div>
-            <div class="k"><b>Processo</b><span>posicionamento até aprovação</span></div>
-          </div>
-
-          <div class="divider"></div>
-
-          <div class="checklist">
-            <div class="check"><div class="ok">✓</div><div><b>Você não fica largado</b><span>acompanhamento e ajustes durante o caminho</span></div></div>
-            <div class="check"><div class="ok">✓</div><div><b>Plano simples e repetível</b><span>clareza do que fazer toda semana</span></div></div>
-            <div class="check"><div class="ok">✓</div><div><b>Portfólio com direção</b><span>projetos que contam ponto para quem contrata</span></div></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <!-- COMO FUNCIONA -->
-  <section id="como-funciona">
-    <div class="wrap">
-      <h2 class="section-title reveal">Mentoria completa, prática e com suporte real</h2>
-      <p class="section-desc reveal" data-delay="1">
-        Muita gente estuda e continua sem resposta porque não tem estratégia, posicionamento e rotina de candidaturas.
-        O Booster existe para virar isso com um plano executável.
-      </p>
-
-      <div class="grid-4">
-        <div class="card reveal lift" data-delay="1">
-          <strong>Mentoria completa</strong>
-          <p>Acompanhamento e plano individual com objetivo único: contratação.</p>
-        </div>
-        <div class="card reveal lift" data-delay="2">
-          <strong>Prática e comunidade</strong>
-          <p>Você executa, recebe feedback e tem suporte real para manter constância.</p>
-        </div>
-        <div class="card reveal lift" data-delay="3">
-          <strong>Empregabilidade</strong>
-          <p>Currículo, LinkedIn, candidaturas e entrevistas com método.</p>
-        </div>
-        <div class="card reveal lift" data-delay="4">
-          <strong>Reconhecimento</strong>
-          <p>Marcos e conquistas para manter motivação e consistência.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROCESSO -->
-  <section id="processo">
-    <div class="wrap">
-      <div class="grid-2">
+    <main>
+      <section class="hero">
         <div>
-          <h2 class="section-title reveal">O processo até a contratação</h2>
-          <p class="section-desc reveal" data-delay="1">
-            A maioria trava em 4 pontos: currículo fraco, LinkedIn mal posicionado, candidaturas sem rotina e entrevistas sem preparo.
-            Aqui você vira contratável com um plano semanal simples.
+          <div class="badgeTop">
+            <div class="badgeDot"></div>
+            Edição digital • Notion
+          </div>
+
+          <h1 class="heroTitle">
+            Saia do improviso e coloque
+            <br>
+            <span>Ordem no Caos</span>
+          </h1>
+
+          <p class="heroSubtitle">
+            O <strong>Planner Quintino Coders 2026</strong> é o sistema que junta
+            rotina de estudos, projetos, vagas e vida pessoal em um único lugar,
+            pronto para usar no Notion.
           </p>
 
-          <div class="timeline">
-            <div class="step reveal lift" data-delay="1">
-              <div class="num">1</div>
-              <div>
-                <b>Posicionamento</b>
-                <span>currículo e LinkedIn alinhados com vagas reais, clareza e palavras chave</span>
-              </div>
+          <div class="heroPoints">
+            <div class="heroChip">
+              <div class="heroChipIcon">Q</div>
+              Feito por quem já passou pelo perrengue de dev iniciante
             </div>
-            <div class="step reveal lift" data-delay="2">
-              <div class="num">2</div>
-              <div>
-                <b>Direção técnica</b>
-                <span>o que estudar e o que ignorar para seu nível, sem estudo aleatório</span>
-              </div>
+            <div class="heroChip">
+              📌 Cards prontos: projetos, vagas, currículo, faculdade e mais
             </div>
-            <div class="step reveal lift" data-delay="3">
-              <div class="num">3</div>
-              <div>
-                <b>Portfólio estratégico</b>
-                <span>projetos com objetivo, README forte e discurso pronto para entrevista</span>
-              </div>
-            </div>
-            <div class="step reveal lift" data-delay="4">
-              <div class="num">4</div>
-              <div>
-                <b>Candidaturas com método</b>
-                <span>rotina, acompanhamento e ajustes do funil para gerar retorno</span>
-              </div>
-            </div>
-            <div class="step reveal lift" data-delay="4">
-              <div class="num">5</div>
-              <div>
-                <b>Entrevistas</b>
-                <span>simulações, feedback e ajuste de postura e respostas</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <aside class="pricing reveal lift tilt" id="preco" data-delay="2">
-          <div class="pricing-head">
-            <div class="pill"><span class="dot"></span> Entradas limitadas</div>
-            <div style="height:10px"></div>
-            <div class="price">
-              <div>
-                <div class="value">Quintino Booster</div>
-                <div class="anchor">Mentoria de empregabilidade, não curso gravado</div>
-              </div>
-              <div style="text-align:right">
-                <div class="value">R$ 297 <small>à vista</small></div>
-                <div class="mini">ou no checkout com parcelamento disponível</div>
-              </div>
+            <div class="heroChip">
+              🧠 Pensado para quem trabalha, estuda e programa no tempo livre
             </div>
           </div>
 
-          <div class="pricing-body">
-            <b>Você recebe</b>
-            <div class="inc">
-              <div class="item"><i>✓</i><div><b>Plano semanal claro</b><div class="mini">metas e execução guiada</div></div></div>
-              <div class="item"><i>✓</i><div><b>Feedback em currículo e LinkedIn</b><div class="mini">ajustes com foco em recrutador</div></div></div>
-              <div class="item"><i>✓</i><div><b>Direção de portfólio</b><div class="mini">projetos que contam ponto</div></div></div>
-              <div class="item"><i>✓</i><div><b>Treino de entrevistas</b><div class="mini">simulação e confiança</div></div></div>
-              <div class="item"><i>✓</i><div><b>Vagas alinhadas ao perfil</b><div class="mini">menos ansiedade, mais método</div></div></div>
+          <div class="heroCtas">
+            <a href="https://pay.kiwify.com.br/r5H2nqm" class="buttonPrimary js-main-buy">
+              Baixar meu Planner agora
+              <span>🚀</span>
+            </a>
+            <a href="#o-que-tem" class="buttonGhost">
+              Ver os blocos da página
+            </a>
+          </div>
+          <p class="heroNote">
+            Acesso vitalício ao template + atualizações futuras do Planner Quintino Coders.
+          </p>
+        </div>
+
+        <div class="heroMedia">
+          <div class="heroGlow"></div>
+
+          <div class="plannerCard">
+            <div class="plannerHeader">
+              <div class="plannerLogoMark">Q</div>
+            </div>
+            <div class="plannerBody">
+              <div class="plannerTitle">Planner: Quintino Coders 2026</div>
+              <div class="plannerSub">
+                Visual minimalista em preto e branco, com blocos clicáveis
+                para cada área da sua vida dev.
+              </div>
+
+              <div class="plannerGrid">
+                <div class="flipClock">
+                  <div class="flipClockTop">
+                    <div class="flipBlock">23</div>
+                    <div class="flipBlock">15</div>
+                  </div>
+                  <div class="flipClockBottom">
+                    <span>Wednesday</span>
+                    <span>Studying • Shipping • Applying</span>
+                  </div>
+                </div>
+
+                <div class="miniMonth">
+                  <div class="miniMonthHeader">
+                    <span>December 2025</span>
+                    <div class="miniMonthArrows">
+                      <span>‹</span>
+                      <span>›</span>
+                    </div>
+                  </div>
+                  <div class="miniMonthGrid">
+                    <div class="miniMonthCellLabel">M</div>
+                    <div class="miniMonthCellLabel">T</div>
+                    <div class="miniMonthCellLabel">W</div>
+                    <div class="miniMonthCellLabel">T</div>
+                    <div class="miniMonthCellLabel">F</div>
+                    <div class="miniMonthCellLabel">S</div>
+                    <div class="miniMonthCellLabel">S</div>
+
+                    <div class="miniMonthCellDay"></div>
+                    <div class="miniMonthCellDay"></div>
+                    <div class="miniMonthCellDay">1</div>
+                    <div class="miniMonthCellDay">2</div>
+                    <div class="miniMonthCellDay">3</div>
+                    <div class="miniMonthCellDay">4</div>
+                    <div class="miniMonthCellDay">5</div>
+
+                    <div class="miniMonthCellDay">6</div>
+                    <div class="miniMonthCellDay">7</div>
+                    <div class="miniMonthCellDay">8</div>
+                    <div class="miniMonthCellDay miniMonthCellDayActive">9</div>
+                    <div class="miniMonthCellDay">10</div>
+                    <div class="miniMonthCellDay">11</div>
+                    <div class="miniMonthCellDay">12</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="plannerFooterTags">
+                <div class="plannerTag">Planejamento diário</div>
+                <div class="plannerTag">Projetos reais para portfólio</div>
+                <div class="plannerTag">Vagas e processos seletivos</div>
+                <div class="plannerTag">Rotina para primeiro emprego</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="sectionHeader">
+          <div>
+            <h2 class="sectionTitle">Para quem eu criei esse Planner</h2>
+            <p class="sectionSubtitle">
+              Em vez de mais um “planner bonitinho”, você vai ter um sistema
+              pensado para devs iniciantes que precisam conciliar trabalho,
+              faculdade, projetos e hunt de vagas.
+            </p>
+          </div>
+          <div class="pillList">
+            <div class="pill">💻 Estudantes de programação</div>
+            <div class="pill">🧑‍💻 Devs iniciantes</div>
+            <div class="pill">📚 Quem está travado no caos</div>
+          </div>
+        </div>
+
+        <div class="audienceGrid">
+          <div class="audienceCard">
+            <div class="audienceLabel">Perfil 01</div>
+            <div class="audienceTitle">Quem não sabe por onde começar</div>
+            <p class="audienceText">
+              Você abre o LinkedIn, vê mil vagas, mil stacks diferentes
+              e sente que está sempre atrasado. O planner organiza
+              <strong>o que fazer primeiro</strong> e como encaixar na sua rotina.
+            </p>
+          </div>
+          <div class="audienceCard">
+            <div class="audienceLabel">Perfil 02</div>
+            <div class="audienceTitle">Quem já estuda, mas não evolui</div>
+            <p class="audienceText">
+              Você assiste aula, salva vídeo, começa cursos… mas não sente
+              progresso. Os blocos de projetos, roadmaps e rotina diária
+              te puxam para a prática e consistência.
+            </p>
+          </div>
+          <div class="audienceCard">
+            <div class="audienceLabel">Perfil 03</div>
+            <div class="audienceTitle">Quem quer o primeiro emprego dev</div>
+            <p class="audienceText">
+              Dentro do planner você encontra uma
+              <strong>rotina diária para encontrar vagas</strong>,
+              espaço para organizar processos seletivos e um bloco dedicado
+              ao seu currículo.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="o-que-tem" class="section">
+        <div class="sectionHeader">
+          <div>
+            <h2 class="sectionTitle">O que tem dentro do Planner Quintino Coders 2026</h2>
+            <p class="sectionSubtitle">
+              A estrutura principal da página é baseada em cards em preto e branco,
+              como no Notion, cada um abrindo um “mundo” diferente da sua vida dev.
+            </p>
+          </div>
+        </div>
+
+        <div class="modulesGrid">
+          <div class="moduleCard">
+            <div class="moduleCardTop">
+              <div class="moduleIconBox">🕒</div>
+              <div class="moduleTitleTop">Planejamento diário</div>
+            </div>
+            <div class="moduleCardBottom">
+              <div class="moduleMeta">Rotina clara, sem depender de motivação</div>
+              <p class="moduleText">
+                Bloco para planejar seu dia com tarefas de estudos, projetos,
+                networking e vida pessoal. Nada de lista infinita; só o que
+                realmente precisa ser feito naquele dia.
+              </p>
+            </div>
+          </div>
+
+          <div class="moduleCard">
+            <div class="moduleCardTop">
+              <div class="moduleIconBox">📚</div>
+              <div class="moduleTitleTop">Livros e conteúdos</div>
+            </div>
+            <div class="moduleCardBottom">
+              <div class="moduleMeta">O que você está lendo e o que ainda quer ler</div>
+              <p class="moduleText">
+                Espaço para organizar livros, cursos e materiais de estudo,
+                com status, data de início, notas e principais aprendizados.
+              </p>
+            </div>
+          </div>
+
+          <div class="moduleCard">
+            <div class="moduleCardTop">
+              <div class="moduleIconBox">💡</div>
+              <div class="moduleTitleTop">Ideias de projetos</div>
+            </div>
+            <div class="moduleCardBottom">
+              <div class="moduleMeta">Ideias não se perdem, viram portfólio</div>
+              <p class="moduleText">
+                Uma área só para reunir ideias de projetos, com tags de dificuldade,
+                stack, objetivo e nível de impacto para o seu currículo.
+              </p>
+            </div>
+          </div>
+
+          <div class="moduleCard">
+            <div class="moduleCardTop">
+              <div class="moduleIconBox">🧭</div>
+              <div class="moduleTitleTop">Road Maps de estudo</div>
+            </div>
+            <div class="moduleCardBottom">
+              <div class="moduleMeta">Passo a passo por tecnologia</div>
+              <p class="moduleText">
+                Blocos para guardar roadmaps de front, back, dados ou o que
+                fizer sentido para você, marcando o que já foi concluído.
+              </p>
+            </div>
+          </div>
+
+          <div class="moduleCard">
+            <div class="moduleCardTop">
+              <div class="moduleIconBox">💼</div>
+              <div class="moduleTitleTop">Vagas e processos seletivos</div>
+            </div>
+            <div class="moduleCardBottom">
+              <div class="moduleMeta">Nada de se perder no meio das candidaturas</div>
+              <p class="moduleText">
+                Uma tabela para acompanhar cada vaga, com status, data da candidatura,
+                retorno, contato e próximos passos.
+              </p>
+            </div>
+          </div>
+
+          <div class="moduleCard">
+            <div class="moduleCardTop">
+              <div class="moduleIconBox">📄</div>
+              <div class="moduleTitleTop">Meu currículo e faculdade</div>
+            </div>
+            <div class="moduleCardBottom">
+              <div class="moduleMeta">Central onde você atualiza tudo</div>
+              <p class="moduleText">
+                Espaço para checklist do currículo, controle de matérias da faculdade,
+                trabalhos, TCC e aquilo que não pode ser esquecido no semestre.
+              </p>
+            </div>
+          </div>
+
+          <div class="moduleCard">
+            <div class="moduleCardTop">
+              <div class="moduleIconBox">🧾</div>
+              <div class="moduleTitleTop">Colas de programação</div>
+            </div>
+            <div class="moduleCardBottom">
+              <div class="moduleMeta">Snippet hoje, produtividade amanhã</div>
+              <p class="moduleText">
+                Um lugar para salvar snippets, comandos, anotações rápidas de
+                JS, Java, Python, Git e o que mais você usa no dia a dia.
+              </p>
+            </div>
+          </div>
+
+          <div class="moduleCard">
+            <div class="moduleCardTop">
+              <div class="moduleIconBox">🚀</div>
+              <div class="moduleTitleTop">Meus projetos pessoais</div>
+            </div>
+            <div class="moduleCardBottom">
+              <div class="moduleMeta">Do “um dia eu faço” para “deploy feito”</div>
+              <p class="moduleText">
+                Bloco para acompanhar o andamento dos seus projetos principais:
+                ideia, planejamento, tarefas, deploy e o que ainda falta
+                para virar case no seu portfólio.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="sectionHeader">
+          <div>
+            <h2 class="sectionTitle">Como o Planner encaixa na sua rotina</h2>
+            <p class="sectionSubtitle">
+              O objetivo não é te dar mais coisas para fazer, e sim
+              <strong>organizar o que já está na sua cabeça</strong> em uma
+              estrutura simples de seguir.
+            </p>
+          </div>
+        </div>
+
+        <div class="benefitsGrid">
+          <div class="benefitCard">
+            <div class="benefitTag">Passo 01</div>
+            <div class="benefitTitle">Você duplica o template no Notion</div>
+            <p class="benefitText">
+              Ao concluir a “compra” (ou cadastro), você recebe o link do template oficial
+              do Planner Quintino Coders 2026. Com um clique, ele vai para a
+              sua conta do Notion e vira seu para sempre.
+            </p>
+          </div>
+          <div class="benefitCard">
+            <div class="benefitTag">Passo 02</div>
+            <div class="benefitTitle">Personaliza em 20 minutos</div>
+            <p class="benefitText">
+              Você adapta os blocos para a sua realidade: faculdade,
+              trabalho, stack de interesse e rotina diária. O esqueleto já
+              está pronto, você só encaixa sua vida ali.
+            </p>
+          </div>
+          <div class="benefitCard">
+            <div class="benefitTag">Passo 03</div>
+            <div class="benefitTitle">Segue o plano, mesmo nos dias ruins</div>
+            <p class="benefitText">
+              O Planner foi pensado para te ajudar principalmente quando
+              o cansaço bate. Você abre a página principal e já sabe
+              <strong>qual é o próximo passo</strong>, sem ficar pensando demais.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="comprar" class="priceSection">
+        <div class="priceCard">
+          <div>
+            <div class="priceHeaderLabel">Planner digital 2026</div>
+            <div class="priceTitle">Planner Quintino Coders 2026</div>
+            <div class="priceSubtitle">
+              Template completo no Notion + atualizações futuras +
+              foco total em dev iniciante que quer o primeiro emprego.
             </div>
 
-            <div class="cta">
-              <a class="btn primary" href="https://pay.kiwify.com.br/d9puKrg" target="_blank" rel="noopener">Entrar agora</a>
-              <div class="scarcity">
-                <div>Vagas limitadas para acompanhamento real</div>
-                <span>quando fechar, fecha</span>
-              </div>
-              <div class="mini">
-                Você entra, recebe o plano e já começa com o que te destrava nos próximos dias.
-              </div>
+            <ul class="priceBulletList">
+              <li>
+                <div class="priceBulletIcon">✓</div>
+                <span>Dashboard principal com visão de ano, mês e dia.</span>
+              </li>
+              <li>
+                <div class="priceBulletIcon">✓</div>
+                <span>Blocos dedicados para estudos, projetos, vagas e vida pessoal.</span>
+              </li>
+              <li>
+                <div class="priceBulletIcon">✓</div>
+                <span>Modelo pronto de rotina diária para encontrar vagas.</span>
+              </li>
+              <li>
+                <div class="priceBulletIcon">✓</div>
+                <span>Área de colas de programação e anotações técnicas.</span>
+              </li>
+              <li>
+                <div class="priceBulletIcon">✓</div>
+                <span>Guia rápido em texto explicando como usar cada bloco.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="priceCtaArea">
+            <!-- Troque o href pelo link do seu checkout, formulário ou link do Notion -->
+            <a href="https://pay.kiwify.com.br/r5H2nqm" class="buttonPrimary js-main-buy">
+              Baixar meu Planner agora
+              <span>🚀</span>
+            </a>
+            <div class="priceGuarantee">
+              Se você aplicar de verdade e sentir que o Planner não te ajudou
+              a organizar a rotina, é só me chamar que a gente ajusta juntos
+              dentro da comunidade Quintino Coders.
+            </div>
+            <div class="priceMiniNote">
+              Produto digital. Entrega imediata por e-mail e página de confirmação.
             </div>
           </div>
-        </aside>
-      </div>
-    </div>
-  </section>
+        </div>
+      </section>
 
-  <!-- PROVAS -->
-  <section id="provas">
-    <div class="wrap">
-      <h2 class="section-title reveal">Provas e sinais de que funciona</h2>
-      <p class="section-desc reveal" data-delay="1">
-        Aqui você coloca sua carreira em modo execução. Se quiser, substitua os depoimentos abaixo por prints e cases reais seus.
-      </p>
-
-      <div class="grid-3">
-        <div class="quote reveal lift" data-delay="1">
-          <p>Eu parei de estudar no escuro. Em uma semana meu currículo ficou claro e comecei a receber resposta em vaga.</p>
-          <div class="who">
-            <div class="avatar">A</div>
-            <div><b>Mentorado</b><span>primeiras entrevistas</span></div>
-          </div>
-        </div>
-        <div class="quote reveal lift" data-delay="2">
-          <p>O plano semanal me salvou. Eu fazia tudo aleatório. Agora eu sei exatamente o que fazer todo dia.</p>
-          <div class="who">
-            <div class="avatar">B</div>
-            <div><b>Mentorada</b><span>transição de carreira</span></div>
-          </div>
-        </div>
-        <div class="quote reveal lift" data-delay="3">
-          <p>As simulações de entrevista foram o diferencial. Eu travava muito na hora de me apresentar.</p>
-          <div class="who">
-            <div class="avatar">C</div>
-            <div><b>Mentorado</b><span>postura e discurso</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="divider"></div>
-
-      <div class="grid-3">
-        <div class="card soft reveal lift" data-delay="1">
-          <strong>2.000+ na comunidade</strong>
-          <p>Base com vagas, suporte e networking dentro da Quintino Coders.</p>
-        </div>
-        <div class="card soft reveal lift" data-delay="2">
-          <strong>Foco total em contratação</strong>
-          <p>Currículo, LinkedIn, candidaturas e entrevistas, sem enrolação.</p>
-        </div>
-        <div class="card soft reveal lift" data-delay="3">
-          <strong>Rotina simples</strong>
-          <p>O que destrava não é genialidade, é constância com método.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- GARANTIA -->
-  <section id="garantia">
-    <div class="wrap">
-      <h2 class="section-title reveal">Garantia: ou você conquista seu emprego ou recebe seu dinheiro de volta</h2>
-      <p class="section-desc reveal" data-delay="1">
-        Se após <b>6 meses de acompanhamento ativo</b> seguindo plano e entregas combinadas,
-        você não conquistar seu primeiro emprego, devolvemos o valor investido.
-        <br/><br/>
-        <span class="mini">
-          Recomendação: crie uma página ou seção “Regras da Garantia” com critérios objetivos para evitar dúvidas.
-        </span>
-      </p>
-
-      <div class="grid-3">
-        <div class="card reveal lift" data-delay="1">
-          <strong>Compromisso do mentorado</strong>
-          <p>seguir rotina e entregas combinadas com acompanhamento.</p>
-        </div>
-        <div class="card reveal lift" data-delay="2">
-          <strong>Compromisso do Booster</strong>
-          <p>plano, direção e feedbacks durante o período.</p>
-        </div>
-        <div class="card reveal lift" data-delay="3">
-          <strong>Transparência</strong>
-          <p>sem promessas mágicas, processo e execução.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section id="faq">
-    <div class="wrap">
-      <h2 class="section-title reveal">Dúvidas que mais travam gente boa</h2>
-      <p class="section-desc reveal" data-delay="1">
-        Se você está com essas dúvidas, você é exatamente o tipo de pessoa que mais evolui aqui.
-      </p>
-
-      <div class="faq">
-        <div class="acc open reveal lift" data-delay="1">
-          <button type="button">
-            Eu sou iniciante. Serve para mim
-            <span class="plus">+</span>
-          </button>
-          <div class="content">
-            Sim. O Booster ajusta direção técnica e posicionamento para seu nível. O objetivo é te levar para vagas compatíveis e evoluir com um plano semanal.
+      <section class="section">
+        <div class="sectionHeader">
+          <div>
+            <h2 class="sectionTitle">Perguntas frequentes</h2>
+            <p class="sectionSubtitle">
+              Algumas dúvidas que normalmente aparecem antes de alguém decidir
+              organizar a vida dev de vez.
+            </p>
           </div>
         </div>
 
-        <div class="acc reveal lift" data-delay="2">
-          <button type="button">
-            Eu já estudei muito e não tenho retorno. O que muda aqui
-            <span class="plus">+</span>
-          </button>
-          <div class="content">
-            O foco muda de estudo infinito para empregabilidade: currículo, LinkedIn, rotina de candidaturas, portfólio com direção e simulação de entrevistas.
+        <div class="faqGrid">
+          <div class="faqItem">
+            <div class="faqQuestion">Preciso dominar o Notion para usar o Planner?</div>
+            <div class="faqAnswer">
+              Não. Você só precisa ter uma conta gratuita no Notion.
+              Depois é só clicar em “Duplicar” e o template vai para o seu
+              workspace. Dentro do Planner eu explico, em linguagem simples,
+              como navegar e personalizar os blocos principais.
+            </div>
+          </div>
+
+          <div class="faqItem">
+            <div class="faqQuestion">Posso usar em celular ou só no computador?</div>
+            <div class="faqAnswer">
+              Você pode usar nos dois. O Planner foi pensado para funcionar
+              bem em desktop (para estudar e programar) e também em mobile,
+              para você atualizar tarefas rápidas, vagas e ideias no dia a dia.
+            </div>
+          </div>
+
+          <div class="faqItem">
+            <div class="faqQuestion">É um curso ou só o template?</div>
+            <div class="faqAnswer">
+              É um template completo de organização, com orientações em
+              texto dentro de cada bloco. A ideia é que você tenha um
+              sistema pronto, sem precisar assistir horas de aula para
+              começar a usar.
+            </div>
+          </div>
+
+          <div class="faqItem">
+            <div class="faqQuestion">Vou receber atualizações futuras?</div>
+            <div class="faqAnswer">
+              Sim. Sempre que eu lançar uma versão melhorada do Planner
+              Quintino Coders, você recebe as novidades por e-mail ou
+              pela comunidade para duplicar a versão atualizada.
+            </div>
           </div>
         </div>
+      </section>
+    </main>
 
-        <div class="acc reveal lift" data-delay="3">
-          <button type="button">
-            Preciso ter portfólio pronto para entrar
-            <span class="plus">+</span>
-          </button>
-          <div class="content">
-            Não. Você entra e recebe direção de projetos para montar portfólio que realmente conta ponto. Você vai construir com estratégia, não no chute.
-          </div>
-        </div>
-
-        <div class="acc reveal lift" data-delay="4">
-          <button type="button">
-            Isso é curso gravado
-            <span class="plus">+</span>
-          </button>
-          <div class="content">
-            Não. É mentoria com plano e feedback. A diferença é você executar com acompanhamento, em vez de ver conteúdo e ficar travado.
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- FINAL CTA -->
-  <section id="entrar">
-    <div class="wrap">
-      <div class="final reveal lift" data-delay="1">
-        <h2 style="margin:0 0 10px;letter-spacing:-.3px">Pronto para parar de tentar sozinho</h2>
-        <p class="muted" style="margin:0;line-height:1.75">
-          Você pode continuar estudando sem direção, ou entrar em um programa feito para te levar até a contratação com método, acompanhamento e comunidade.
-        </p>
-
-        <div class="hero-actions" style="margin-top:14px">
-          <a class="btn primary" href="https://pay.kiwify.com.br/d9puKrg" target="_blank" rel="noopener">Entrar no Quintino Booster</a>
-          <a class="btn" href="#processo">Ver o processo</a>
-        </div>
-
-        <div class="divider"></div>
-        <p class="mini">
-          © <span id="year"></span> Quintino Booster. Resultados variam conforme dedicação, mercado e execução do plano.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Sticky CTA mobile -->
-  <div class="sticky-cta">
-    <div class="wrap">
+    <footer class="pageFooter">
       <div>
-        <b>Quintino Booster</b>
-        <div class="mini">mentoria com foco em contratação</div>
+        <strong>Quintino Coders</strong> • Planner Quintino Coders 2026<br/>
+        Organizando a rotina de devs iniciantes que querem o primeiro emprego.
       </div>
-      <a class="btn primary" href="https://pay.kiwify.com.br/d9puKrg" target="_blank" rel="noopener">Entrar</a>
-    </div>
+    </footer>
   </div>
 
   <script>
-    // ano automático
-    document.getElementById("year").textContent = new Date().getFullYear();
+    // Scroll suave para âncoras internas (#comprar, #o-que-tem etc.)
+    document.addEventListener("DOMContentLoaded", function () {
+      const internalLinks = document.querySelectorAll('a[href^="#"]');
 
-    // scroll suave (âncoras)
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-      a.addEventListener("click", (e) => {
-        const href = a.getAttribute("href");
-        if(!href || href === "#") return;
-        const el = document.querySelector(href);
-        if(el){
-          e.preventDefault();
-          el.scrollIntoView({ behavior:"smooth", block:"start" });
-        }
-      });
-    });
+      internalLinks.forEach(function (link) {
+        link.addEventListener("click", function (event) {
+          const targetId = this.getAttribute("href").slice(1);
+          const target = document.getElementById(targetId);
 
-    // accordion (mantém 1 aberto)
-    document.querySelectorAll(".acc button").forEach(btn => {
-      btn.addEventListener("click", () => {
-        const acc = btn.closest(".acc");
-        const isOpen = acc.classList.contains("open");
-        document.querySelectorAll(".acc").forEach(a => a.classList.remove("open"));
-        if(!isOpen) acc.classList.add("open");
-      });
-    });
-
-    /* ===== ANIMAÇÕES ===== */
-
-    // progress bar + topbar shadow
-    (() => {
-      const bar = document.querySelector(".readbar > i");
-      const onScroll = () => {
-        const doc = document.documentElement;
-        const scrollTop = doc.scrollTop || document.body.scrollTop;
-        const height = (doc.scrollHeight - doc.clientHeight) || 1;
-        const p = Math.min(100, Math.max(0, (scrollTop / height) * 100));
-        if(bar) bar.style.width = p + "%";
-
-        const topbar = document.querySelector(".topbar");
-        if(topbar){
-          if(scrollTop > 6) topbar.classList.add("scrolled");
-          else topbar.classList.remove("scrolled");
-        }
-      };
-      window.addEventListener("scroll", onScroll, { passive:true });
-      onScroll();
-    })();
-
-    // parallax leve no background
-    (() => {
-      let raf = 0;
-      const onMove = (e) => {
-        if(raf) return;
-        raf = requestAnimationFrame(() => {
-          const x = (e.clientX / window.innerWidth - 0.5);
-          const y = (e.clientY / window.innerHeight - 0.5);
-          document.body.style.setProperty("--px", (x * 18).toFixed(2) + "px");
-          document.body.style.setProperty("--py", (y * 12).toFixed(2) + "px");
-          raf = 0;
+          if (target) {
+            event.preventDefault();
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          }
         });
-      };
-      window.addEventListener("mousemove", onMove, { passive:true });
-    })();
+      });
 
-    // reveal on scroll
-    (() => {
-      const els = document.querySelectorAll(".reveal");
-      if(!("IntersectionObserver" in window) || !els.length){
-        els.forEach(el => el.classList.add("in"));
-        return;
+      // Sombra no header quando rolar
+      const header = document.querySelector(".pageHeader");
+      function handleScroll() {
+        if (window.scrollY > 10) {
+          header.classList.add("scrolled");
+        } else {
+          header.classList.remove("scrolled");
+        }
       }
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(ent => {
-          if(ent.isIntersecting){
-            ent.target.classList.add("in");
-            io.unobserve(ent.target);
-          }
+      window.addEventListener("scroll", handleScroll);
+      handleScroll();
+
+      // Tracking básico do clique no botão de download
+      const buyButtons = document.querySelectorAll(".js-main-buy");
+      buyButtons.forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          console.log("CTA Planner clicado");
+
+          // Exemplo para plugar depois:
+          // fbq('track', 'Lead', { product: 'Planner Quintino Coders 2026' });
+          // ttq.track('ClickButton', { content_name: 'Planner 2026' });
         });
-      }, { threshold: 0.12, rootMargin: "0px 0px -10% 0px" });
-
-      els.forEach(el => io.observe(el));
-    })();
-
-    // counter numbers (use data-count)
-    (() => {
-      const counters = document.querySelectorAll("[data-count]");
-      if(!counters.length) return;
-
-      const animate = (el) => {
-        const target = parseInt(el.getAttribute("data-count"), 10) || 0;
-        const dur = parseInt(el.getAttribute("data-dur"), 10) || 900;
-        const start = performance.now();
-        const from = 0;
-
-        const tick = (t) => {
-          const p = Math.min(1, (t - start) / dur);
-          const eased = 1 - Math.pow(1 - p, 3);
-          const val = Math.floor(from + (target - from) * eased);
-          el.textContent = val.toLocaleString("pt-BR");
-          if(p < 1) requestAnimationFrame(tick);
-        };
-        requestAnimationFrame(tick);
-      };
-
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(ent => {
-          if(ent.isIntersecting){
-            animate(ent.target);
-            io.unobserve(ent.target);
-          }
-        });
-      }, { threshold:0.6 });
-
-      counters.forEach(c => io.observe(c));
-    })();
-
-    // tilt effect (desktop)
-    (() => {
-      const cards = document.querySelectorAll(".tilt");
-      if(!cards.length) return;
-
-      const isTouch = matchMedia("(hover: none)").matches;
-      if(isTouch) return;
-
-      cards.forEach(card => {
-        let rect;
-
-        const onEnter = () => { rect = card.getBoundingClientRect(); };
-        const onMove = (e) => {
-          if(!rect) rect = card.getBoundingClientRect();
-          const x = (e.clientX - rect.left) / rect.width;
-          const y = (e.clientY - rect.top) / rect.height;
-          const rx = (0.5 - y) * 7;
-          const ry = (x - 0.5) * 10;
-          card.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-2px)`;
-        };
-        const onLeave = () => {
-          card.style.transform = "perspective(900px) rotateX(0deg) rotateY(0deg) translateY(0px)";
-          rect = null;
-        };
-
-        card.addEventListener("mouseenter", onEnter);
-        card.addEventListener("mousemove", onMove);
-        card.addEventListener("mouseleave", onLeave);
       });
-    })();
+    });
   </script>
 </body>
 </html>
