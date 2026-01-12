@@ -110,6 +110,27 @@ const App: React.FC = () => {
               <button className="w-full py-5 bg-cyan-500 hover:bg-cyan-400 text-[#0a0a0b] text-xl font-black rounded-2xl flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-[0.98] glow-cyan">
                 COMPRAR AGORA <ArrowRight />
               </button>
+
+              {/* ✅ NOVO: espaço para imagem logo depois do botão */}
+              <div className="mt-8">
+                <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/5">
+                  {/* Troque o src por:
+                      1) um link direto (https://i.imgur.com/ID.png) OU
+                      2) uma imagem local em /public/images/checkout-image.png => src="/images/checkout-image.png"
+                  */}
+                  <img
+                    src="https://i.imgur.com/P4jPr0R.png"
+                    alt="Imagem após o botão"
+                    className="w-full h-auto opacity-95"
+                    loading="lazy"
+                  />
+                </div>
+
+                {/* legenda opcional (pode remover se não quiser) */}
+                <p className="mt-3 text-zinc-500 text-xs">
+                  Acesso imediato via Notion ou PDF
+                </p>
+              </div>
             </div>
 
             <p className="text-zinc-500 text-sm flex items-center justify-center gap-2">
