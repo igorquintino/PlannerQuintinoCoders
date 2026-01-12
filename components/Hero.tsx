@@ -26,7 +26,7 @@ const Hero: React.FC = () => {
 
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a 
-            href="#checkout" 
+            href="https://pay.kiwify.com.br/r5H2nqm" 
             className="w-full sm:w-auto px-8 py-4 bg-cyan-500 hover:bg-cyan-400 text-[#0a0a0b] font-bold rounded-xl text-lg flex items-center justify-center gap-2 transition-all hover:translate-y-[-2px] glow-cyan"
           >
             Quero o Planner Quintino Coders <ChevronRight size={20} />
