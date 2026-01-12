@@ -16,7 +16,7 @@ const Navbar: React.FC = () => {
           <a href="#beneficios" className="hover:text-white transition-colors">Benefícios</a>
         </div>
         <a 
-          href="#checkout" 
+          href="https://pay.kiwify.com.br/r5H2nqm" 
           className="bg-cyan-500 hover:bg-cyan-400 text-black px-5 py-2 rounded-full text-sm font-bold transition-all transform hover:scale-105"
         >
           Garantir Acesso
