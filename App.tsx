@@ -107,9 +107,14 @@ const App: React.FC = () => {
                 </div>
               </div>
 
-              <button className="w-full py-5 bg-cyan-500 hover:bg-cyan-400 text-[#0a0a0b] text-xl font-black rounded-2xl flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-[0.98] glow-cyan">
-                COMPRAR AGORA <ArrowRight />
-              </button>
+             <a
+  href="https://pay.kiwify.com.br/r5H2nqm"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="w-full py-5 bg-cyan-500 hover:bg-cyan-400 text-[#0a0a0b] text-xl font-black rounded-2xl flex items-center justify-center gap-3 transition-all hover:scale-[1.02] active:scale-[0.98] glow-cyan"
+>
+  COMPRAR AGORA <ArrowRight />
+</a>
 
               {/* ✅ NOVO: espaço para imagem logo depois do botão */}
               <div className="mt-8">
@@ -118,12 +123,7 @@ const App: React.FC = () => {
                       1) um link direto (https://i.imgur.com/ID.png) OU
                       2) uma imagem local em /public/images/checkout-image.png => src="/images/checkout-image.png"
                   */}
-                  <img
-                    src="/images/checkout-image.png"
-                    alt="Imagem após o botão"
-                    className="w-full h-auto opacity-95"
-                    loading="lazy"
-                  />
+                  
                 </div>
 
                 {/* legenda opcional (pode remover se não quiser) */}
