@@ -37,7 +37,7 @@ const Hero: React.FC = () => {
         <div className="mt-20 relative">
             <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500/20 to-purple-500/20 rounded-2xl blur-lg"></div>
             <img 
-              src="https://picsum.photos/id/0/1200/600" 
+              src="https://i.imgur.com/P4jPr0R.png" 
               alt="Preview do Planner Quintino Coders no Notion" 
               className="relative rounded-2xl border border-white/10 w-full shadow-2xl grayscale hover:grayscale-0 transition-all duration-700"
             />
