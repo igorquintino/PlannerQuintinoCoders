@@ -127,9 +127,7 @@ const App: React.FC = () => {
                 </div>
 
                 {/* legenda opcional (pode remover se não quiser) */}
-                <p className="mt-3 text-zinc-500 text-xs">
-                  Acesso imediato via Notion ou PDF
-                </p>
+                <p className="mt-3 text-zinc-500 text-xs">Acesso imediato via Notion ou PDF</p>
               </div>
             </div>
 
