@@ -80,12 +80,12 @@ const App: React.FC = () => {
               </div>
 
               <div className="mb-8">
-                <p className="text-zinc-500 line-through mb-2 font-medium">De R$ 97,00 por apenas</p>
+                <p className="text-zinc-500 line-through mb-2 font-medium">De R$ 47,00 por apenas</p>
                 <div className="flex items-center justify-center gap-2">
                   <span className="text-2xl font-bold mt-2">12x</span>
-                  <span className="text-5xl md:text-7xl font-black text-white tracking-tighter">R$ 4,70</span>
+                  <span className="text-5xl md:text-7xl font-black text-white tracking-tighter">R$ 2,25</span>
                 </div>
-                <p className="mt-4 text-zinc-400 font-medium italic">ou R$ 47,00 à vista</p>
+                <p className="mt-4 text-zinc-400 font-medium italic">ou R$ 26,99 à vista</p>
               </div>
 
               <div className="space-y-4 mb-10 text-left max-w-sm mx-auto">
