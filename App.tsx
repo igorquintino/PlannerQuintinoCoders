@@ -46,7 +46,7 @@ const App: React.FC = () => {
                     <div className="flex-1 relative">
                         <div className="absolute -inset-4 bg-cyan-500/10 rounded-[3rem] blur-3xl"></div>
                         <div className="relative bg-zinc-900 border border-white/10 p-4 rounded-[2.5rem] shadow-2xl rotate-2 hover:rotate-0 transition-transform duration-500">
-                             <img src="https://picsum.photos/id/180/800/800" alt="Interface Notion" className="rounded-2xl grayscale contrast-125" />
+                             <img src="https://i.imgur.com/P4jPr0R.png" alt="Interface Notion" className="rounded-2xl grayscale contrast-125" />
                         </div>
                     </div>
                 </div>
