@@ -8,19 +8,19 @@ const Testimonials: React.FC = () => {
       name: "Lucas Silva",
       role: "Transição de Carreira",
       text: "Eu estava pulando de curso em curso sem nunca terminar nada. O Planner me deu o roadmap que faltava pra eu focar em uma stack só.",
-      avatar: "https://picsum.photos/seed/lucas/100/100"
+      avatar: "https://i.imgur.com/Drl3Qit.jpeg"
     },
     {
       name: "Mariana Costa",
       role: "Estudante de ADS",
       text: "O modelo de currículo é sensacional. Refiz o meu seguindo as dicas do Quintino e consegui 3 entrevistas na mesma semana!",
-      avatar: "https://picsum.photos/seed/mari/100/100"
+      avatar: "https://i.imgur.com/CVE4230.jpeg"
     },
     {
       name: "Ricardo Mendes",
       role: "Dev Junior",
       text: "Organização é tudo. O sistema de Pomodoro integrado no Notion mudou minha produtividade. Recomendo demais.",
-      avatar: "https://picsum.photos/seed/ric/100/100"
+      avatar: "https://i.imgur.com/09q9RQs.jpeg"
     }
   ];
 
